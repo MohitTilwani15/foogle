@@ -9,6 +9,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(port, function() {
-  console.log('Express listening on port', port);
-});
+app.listen(port, function() {});

@@ -34,7 +34,7 @@ import { mapGetters } from 'vuex';
 import { SEARCH_NEARBY_RESTAURANTS, SET_VENUE_AS_FAVORITE } from '../services/store/action-types';
 import Results from '../components/Results';
 import Pagination from '../components/Pagination';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 
 export default {
   name: 'home',
@@ -42,7 +42,6 @@ export default {
   components: {
     'results': Results,
     'pagination': Pagination,
-    'loading': Loading,
   },
 
   data() {
@@ -74,7 +73,7 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.fetchRestaurants, this.handlePositionError);
       } else {
-        console.error('geolocation feature not supported')
+        throw new Error('Geolocation feature not suported');
       }
     },
 
@@ -90,8 +89,7 @@ export default {
       });
     },
 
-    handlePositionError(error) {
-      console.log('error', error);
+    handlePositionError() {
       this.locationError = true;
     },
 

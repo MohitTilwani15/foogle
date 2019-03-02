@@ -28,9 +28,6 @@ export default {
         .then((response) => {
           commit(SET_RESTAURANTS, response.data.venues);
         })
-        .catch((err) => {
-          console.error(err);
-        });
     },
   },
 };
