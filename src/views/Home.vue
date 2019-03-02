@@ -14,6 +14,14 @@
       </form>
     </div>
 
+    <div class="input-field col s12">
+      <select v-model="sort" @change="onSortChange">
+        <option value="" disabled selected>Choose your option</option>
+        <option value="distance">Distance</option>
+      </select>
+      <label>Sort</label>
+    </div>
+
     <results
       title="Restaurants"
       :items="restaurants"
@@ -29,8 +37,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { SEARCH_NEARBY_RESTAURANTS, SET_VENUE_AS_FAVORITE } from '../services/store/action-types';
+import { SET_SORTED_RESTAURANTS } from '../services/store/mutation-types';
 import Results from '../components/Results';
 import Pagination from '../components/Pagination';
 // import Loading from '../components/Loading';
@@ -49,6 +58,7 @@ export default {
       pageLimit: 10,
       locationError: false,
       location: '',
+      sort: '',
     };
   },
 
@@ -64,16 +74,35 @@ export default {
   },
 
   mounted() {
+    this.initializeSelect();
     this.getUserLocation();
   },
 
   methods: {
+    ...mapMutations({
+      sortRestaurants: `searchRestaurantModule/SET_SORTED_RESTAURANTS`,
+    }),
+
     getUserLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.fetchRestaurants, this.handlePositionError);
       } else {
         throw new Error('Geolocation feature not suported');
       }
+    },
+
+    initializeSelect() {
+      const elems = document.querySelectorAll('select');
+      M.FormSelect.init(elems, {});
+    },
+
+    onSortChange(e) {
+      this.$router.push({
+        name: this.$route.name,
+        query: { sort: e.target.value }
+      });
+
+      this.sortRestaurants();
     },
 
     fetchRestaurants(position) {

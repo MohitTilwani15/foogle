@@ -1,8 +1,12 @@
 import prod from './prod';
 import dev from './dev';
 
+let keys;
+
 if (process.env.NODE_ENV === 'production') {
-  export default prod;
+   keys = prod;
 } else {
-  export default dev;
+  keys = dev;
 }
+
+export default keys;

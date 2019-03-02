@@ -10,7 +10,9 @@
         class="collection-item"
       >
         <div>
-          {{ item.name }}
+          {{ item.name }}<br>
+          {{ item.location.address }}<br>
+          <strong>{{ item.location.distance / 1000 }} Km</strong>
           <a
             v-if="setFavorite"
             href="#"

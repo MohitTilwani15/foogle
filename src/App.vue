@@ -4,6 +4,7 @@
     id="app"
   >
     <nav-bar />
+
     <router-view />
   </div>
 </template>
