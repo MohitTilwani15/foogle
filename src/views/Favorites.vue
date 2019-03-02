@@ -32,7 +32,9 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch(`userModule/${GET_USER_FAVORITE_VENUE}`, {});
+    if (this.isAuthenticated) {
+      this.$store.dispatch(`userModule/${GET_USER_FAVORITE_VENUE}`, {});
+    }
   },
 };
 </script>
