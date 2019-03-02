@@ -2,7 +2,6 @@ import http from '../../http';
 import { SEARCH_NEARBY_RESTAURANTS } from '../action-types';
 import { SET_RESTAURANTS } from '../mutation-types';
 import { searchVenues } from '../endpoints';
-import keys from '../../../config/keys';
 
 export default {
   namespaced: true,
@@ -25,15 +24,9 @@ export default {
 
   actions: {
     [SEARCH_NEARBY_RESTAURANTS]({ commit }, params) {
-      const apiParams = Object.assign({}, params);
-      apiParams.client_id = keys.clientID;
-      apiParams.client_secret = keys.clientSecret;
-      apiParams.categoryId = '4d4b7105d754a06374d81259';
-      apiParams.v = '20180915';
-
-      http.get(searchVenues, { params: apiParams })
+      http.get(searchVenues, { params })
         .then((response) => {
-          commit(SET_RESTAURANTS, response.data.response.venues);
+          commit(SET_RESTAURANTS, response.data.venues);
         })
         .catch((err) => {
           console.error(err);

@@ -1,8 +1,13 @@
 <template>
   <results
+    v-if="isAuthenticated"
     title="Favorite Restaurants"
     :items="user.items"
   />
+
+  <h3 v-else>
+    Please login to see your favorites
+  </h3>
 </template>
 
 <script>
@@ -22,6 +27,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'userModule/getUser',
+      isAuthenticated: 'userModule/isAuthenticated',
     }),
   },
 

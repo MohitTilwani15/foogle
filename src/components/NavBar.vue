@@ -4,7 +4,8 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Foogle</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a @click="redirectUser">Login</a></li>
+          <li><a  v-if="!isAuthenticated" @click="login">Login</a></li>
+          <li><a v-if="isAuthenticated" @click="logout">Logout</a></li>
         </ul>
       </div>
       <div class="nav-content">
@@ -16,20 +17,37 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-      <li><a href="#">Login</a></li>
+      <li><a v-if="!isAuthenticated" href="#" @click="login">Login</a></li>
+      <li><a v-if="isAuthenticated" href="#" @click="logout">Logout</a></li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import keys from '../config/keys';
 
 export default {
   name: 'navbar',
 
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'userModule/isAuthenticated',
+    }),
+
+    buttonLabel() {
+      return this.isAuthenticated ? 'Logout' : 'Login';
+    }
+  },
+
   methods: {
-    redirectUser() {
+    login() {
       window.location.href = `https://foursquare.com/oauth2/authenticate?client_id=${keys.clientID}&response_type=code&redirect_uri=http://localhost:8080/auth/callback`;
+    },
+
+    logout() {
+      window.sessionStorage.removeItem('access_token');
+      window.location.reload();
     },
   },
 };
