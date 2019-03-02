@@ -12,7 +12,9 @@ export default {
   },
 
   getters: {
-    getRestaurants: state => state.restaurants,
+    getRestaurants: (state) => (pageNo, pageLimit) => state.restaurants.slice((pageLimit * pageNo) - pageLimit, pageLimit * pageNo),
+
+    getTotalRestaurantsCount: state => state.restaurants.length,
   },
 
   mutations: {

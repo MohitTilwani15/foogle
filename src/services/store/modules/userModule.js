@@ -40,7 +40,7 @@ export default {
       apiParams.v = '20180915';
 
       return new Promise((resolve) => {
-        http.post(`venues/${params.VENUE_ID}/like`, apiParams)
+        http.post(`venues/${params.VENUE_ID}/like?oauth_token=${window.sessionStorage.getItem('access_token')}&v=20180915`, apiParams)
         .then(() => {
           resolve();
         });
