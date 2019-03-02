@@ -1,5 +1,8 @@
+import prod from './prod';
+import dev from './dev';
+
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./prod');
+  export default prod;
 } else {
-  module.exports = require('./dev');
+  export default dev;
 }
