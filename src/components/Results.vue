@@ -12,7 +12,7 @@
         <div>
           {{ item.name }}
           <a
-            v-if="setFavorite && isAuthenticated"
+            v-if="setFavorite"
             href="#"
             class="secondary-content"
             @click="setFavorite(item.id)"
@@ -38,9 +38,6 @@ export default {
     },
     setFavorite: {
       type: Function,
-    },
-    isAuthenticated: {
-      type: Boolean,
     },
   },
 };

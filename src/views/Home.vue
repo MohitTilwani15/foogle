@@ -18,7 +18,6 @@
       title="Restaurants"
       :items="restaurants"
       :set-favorite="setFavorite"
-      :is-authenticated="isAuthenticated"
     />
 
     <pagination
@@ -94,7 +93,11 @@ export default {
     },
 
     setFavorite(id) {
-      this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 });
+      if (this.isAuthenticated) {
+        this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 });
+      } else {
+         M.toast({html: 'Please login to set favorites', classes: 'rounded'});
+      }
     },
 
     prev() {
