@@ -12,7 +12,7 @@
         <div>
           {{ item.name }}<br>
           {{ item.location.address }}<br>
-          <strong>{{ item.location.distance / 1000 }} Km</strong>
+          <strong>{{ item.location.distance | validDistance }}</strong>
           <a
             v-if="setFavorite"
             href="#"
@@ -41,6 +41,14 @@ export default {
     setFavorite: {
       type: Function,
     },
+  },
+
+  filters: {
+    validDistance(value) {
+      if (value) {
+        return `${value / 1000} KM`;
+      }
+    }
   },
 };
 </script>

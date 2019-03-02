@@ -9,7 +9,7 @@ export default {
 
   state: {
     user: {},
-    isAuthenticated: false,
+    isAuthenticated: window.sessionStorage.getItem('access_token') ? true : false,
   },
 
   getters: {
