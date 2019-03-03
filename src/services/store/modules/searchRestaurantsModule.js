@@ -51,10 +51,13 @@ export default {
 
   actions: {
     [SEARCH_NEARBY_RESTAURANTS]({ commit }, params) {
-      http.get(searchVenues, { params })
+      return new Promise((resolve) => {
+        http.get(searchVenues, { params })
         .then((response) => {
           commit(SET_RESTAURANTS, response.data.venues);
-        })
+          resolve();
+        });
+      });
     },
   },
 };

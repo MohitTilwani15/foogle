@@ -1,8 +1,11 @@
 <template>
   <div>
 
-    <div v-if="locationError" class="row">
-      <form class="col s12">
+    <div
+      v-if="locationError"
+      class="row"
+    >
+      <form class="col s12" v-on:submit.prevent="fetchRestaurantsFromUserInput">
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">location_on</i>
@@ -14,7 +17,10 @@
       </form>
     </div>
 
-    <div class="input-field col s12">
+    <div
+      v-show="restaurants.length"
+      class="input-field col s12"
+    >
       <select v-model="sort" @change="onSortChange">
         <option value="" disabled selected>Choose your option</option>
         <option value="distance">Distance</option>
@@ -33,6 +39,8 @@
       :next="next"
       :prev="prev"
     />
+
+    <loading :show="showLoader" />
   </div>
 </template>
 
@@ -42,7 +50,7 @@ import { SEARCH_NEARBY_RESTAURANTS, SET_VENUE_AS_FAVORITE } from '../services/st
 import { SET_SORTED_RESTAURANTS } from '../services/store/mutation-types';
 import Results from '../components/Results';
 import Pagination from '../components/Pagination';
-// import Loading from '../components/Loading';
+import Loading from '../components/Loading';
 
 export default {
   name: 'home',
@@ -50,6 +58,7 @@ export default {
   components: {
     'results': Results,
     'pagination': Pagination,
+    'loading': Loading,
   },
 
   data() {
@@ -59,6 +68,7 @@ export default {
       locationError: false,
       location: '',
       sort: '',
+      showLoader: false,
     };
   },
 
@@ -106,14 +116,24 @@ export default {
     },
 
     fetchRestaurants(position) {
+      this.showLoader = true;
       this.$store.dispatch(`searchRestaurantModule/${SEARCH_NEARBY_RESTAURANTS}`, {
         ll: `${position.coords.latitude},${position.coords.longitude}`,
+      }).then(() => {
+        this.showLoader = false;
+      }).catch(() => {
+        this.showLoader = false;
       });
     },
 
     fetchRestaurantsFromUserInput() {
+      this.showLoader = true;
       this.$store.dispatch(`searchRestaurantModule/${SEARCH_NEARBY_RESTAURANTS}`, {
         near: this.location,
+      }).then(() => {
+        this.showLoader = false;
+      }).catch(() => {
+        this.showLoader = false;
       });
     },
 
@@ -123,7 +143,10 @@ export default {
 
     setFavorite(id) {
       if (this.isAuthenticated) {
-        this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 });
+        this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 })
+          .then(() => {
+            window.M.toast({html: 'Added to favorites', classes: 'rounded'});
+          });
       } else {
          window.M.toast({html: 'Please login to set favorites', classes: 'rounded'});
       }

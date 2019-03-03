@@ -42,7 +42,7 @@ export default {
 
   methods: {
     login() {
-      window.location.href = `https://foursquare.com/oauth2/authenticate?client_id=${keys.default.clientID}&response_type=code&redirect_uri=http://localhost:8080/auth/callback`;
+      window.location.href = `https://foursquare.com/oauth2/authenticate?client_id=${keys.default.clientID}&response_type=code&redirect_uri=${keys.default.redirectUri}`;
     },
 
     logout() {

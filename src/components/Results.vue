@@ -11,7 +11,7 @@
       >
         <div>
           {{ item.name }}<br>
-          {{ item.location.address }}<br>
+          <a target="__blank" :href="googleMapsUrl(item.location.lat, item.location.lng)">{{ item.location.address }}</a><br>
           <strong>{{ item.location.distance | validDistance }}</strong>
           <a
             v-if="setFavorite"
@@ -49,6 +49,12 @@ export default {
         return `${value / 1000} KM`;
       }
     }
+  },
+
+  methods: {
+    googleMapsUrl(latitude, longitude) {
+      return `http://maps.google.com/maps?q=${latitude},${longitude}`;
+    },
   },
 };
 </script>
