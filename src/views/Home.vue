@@ -19,7 +19,7 @@
         <option value="" disabled selected>Choose your option</option>
         <option value="distance">Distance</option>
       </select>
-      <label>Sort</label>
+      <label>Sort By</label>
     </div>
 
     <results
@@ -80,7 +80,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      sortRestaurants: `searchRestaurantModule/SET_SORTED_RESTAURANTS`,
+      sortRestaurants: `searchRestaurantModule/${SET_SORTED_RESTAURANTS}`,
     }),
 
     getUserLocation() {
@@ -93,7 +93,7 @@ export default {
 
     initializeSelect() {
       const elems = document.querySelectorAll('select');
-      M.FormSelect.init(elems, {});
+      window.M.FormSelect.init(elems, {});
     },
 
     onSortChange(e) {
@@ -125,7 +125,7 @@ export default {
       if (this.isAuthenticated) {
         this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 });
       } else {
-         M.toast({html: 'Please login to set favorites', classes: 'rounded'});
+         window.M.toast({html: 'Please login to set favorites', classes: 'rounded'});
       }
     },
 

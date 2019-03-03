@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>0/26</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>0/26</span>
       </div>
     </div>
   </div>
@@ -163,7 +163,44 @@
 118
 119
 120
-121</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,6 +235,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,10 +262,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,8 +271,32 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,6 +357,14 @@
       &lt;/form&gt;
     &lt;/div&gt;
 &nbsp;
+    &lt;div class="input-field col s12"&gt;
+      &lt;select v-model="sort" @change="onSortChange"&gt;
+        &lt;option value="" disabled selected&gt;Choose your option&lt;/option&gt;
+        &lt;option value="distance"&gt;Distance&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;label&gt;Sort By&lt;/label&gt;
+    &lt;/div&gt;
+&nbsp;
     &lt;results
       title="Restaurants"
       :items="restaurants"
@@ -314,8 +380,9 @@
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-<span class="cstat-no" title="statement not covered" >import { mapGetters } from 'vuex';</span>
+<span class="cstat-no" title="statement not covered" >import { mapGetters, mapMutations } from 'vuex';</span>
 <span class="cstat-no" title="statement not covered" >import { SEARCH_NEARBY_RESTAURANTS, SET_VENUE_AS_FAVORITE } from '../services/store/action-types';</span>
+<span class="cstat-no" title="statement not covered" >import { SET_SORTED_RESTAURANTS } from '../services/store/mutation-types';</span>
 <span class="cstat-no" title="statement not covered" >import Results from '../components/Results';</span>
 <span class="cstat-no" title="statement not covered" >import Pagination from '../components/Pagination';</span>
 // import Loading from '../components/Loading';
@@ -334,6 +401,7 @@ export default {
       pageLimit: 10,
       locationError: false,
       location: '',
+      sort: '',
     };
   },
 &nbsp;
@@ -349,16 +417,35 @@ export default {
   },
 &nbsp;
   mounted() {
+<span class="cstat-no" title="statement not covered" >    this.initializeSelect();</span>
 <span class="cstat-no" title="statement not covered" >    this.getUserLocation();</span>
   },
 &nbsp;
   methods: {
+    ...mapMutations({
+      sortRestaurants: `searchRestaurantModule/${SET_SORTED_RESTAURANTS}`,
+    }),
+&nbsp;
     getUserLocation() {
 <span class="cstat-no" title="statement not covered" >      if (navigator.geolocation) {</span>
 <span class="cstat-no" title="statement not covered" >        navigator.geolocation.getCurrentPosition(this.fetchRestaurants, this.handlePositionError);</span>
       } else {
 <span class="cstat-no" title="statement not covered" >        throw new Error('Geolocation feature not suported');</span>
       }
+    },
+&nbsp;
+    initializeSelect() {
+<span class="cstat-no" title="statement not covered" >      const elems = document.querySelectorAll('select');</span>
+<span class="cstat-no" title="statement not covered" >      window.M.FormSelect.init(elems, {});</span>
+    },
+&nbsp;
+    onSortChange(e) {
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: this.$route.name,
+        query: { sort: e.target.value }
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.sortRestaurants();</span>
     },
 &nbsp;
     fetchRestaurants(position) {
@@ -381,7 +468,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >      if (this.isAuthenticated) {</span>
 <span class="cstat-no" title="statement not covered" >        this.$store.dispatch(`userModule/${SET_VENUE_AS_FAVORITE}`, { VENUE_ID: id, set: 1 });</span>
       } else {
-<span class="cstat-no" title="statement not covered" >         M.toast({html: 'Please login to set favorites', classes: 'rounded'});</span>
+<span class="cstat-no" title="statement not covered" >         window.M.toast({html: 'Please login to set favorites', classes: 'rounded'});</span>
       }
     },
 &nbsp;
@@ -409,7 +496,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 02 2019 15:44:58 GMT+0100 (CET)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Mar 03 2019 15:01:18 GMT+0100 (CET)
 </div>
 </div>
 <script src="../../prettify.js"></script>
