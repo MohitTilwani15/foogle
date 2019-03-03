@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div
       v-if="locationError"
       class="row"
@@ -29,6 +28,7 @@
     </div>
 
     <results
+      :on-result-click="seeVenueDetails"
       title="Restaurants"
       :items="restaurants"
       :set-favorite="setFavorite"
@@ -83,9 +83,12 @@ export default {
     },
   },
 
+  created() {
+    this.getUserLocation();
+  },
+
   mounted() {
     this.initializeSelect();
-    this.getUserLocation();
   },
 
   methods: {
@@ -150,6 +153,15 @@ export default {
       } else {
          window.M.toast({html: 'Please login to set favorites', classes: 'rounded'});
       }
+    },
+
+    seeVenueDetails(id) {
+      this.$router.push({
+        name: 'Venue Details',
+        params: {
+          id,
+        },
+      });
     },
 
     prev() {
