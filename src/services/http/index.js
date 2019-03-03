@@ -17,8 +17,8 @@ function requestInterceptor(config) {
     if (window.sessionStorage.getItem('access_token')) {
       config.params.oauth_token = window.sessionStorage.getItem('access_token');
     } else {
-      config.params.client_id = keys.clientID;
-      config.params.client_secret = keys.clientSecret;
+      config.params.client_id = keys.default.clientID;
+      config.params.client_secret = keys.default.clientSecret;
     }
   
     config.params.categoryId = '4d4b7105d754a06374d81259';

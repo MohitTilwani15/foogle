@@ -57,8 +57,8 @@ export default {
     [GET_ACCESS_TOKEN]({ commit }, params) {
       return new Promise((resolve) => {
         const apiParams = Object.assign({}, params);
-        apiParams.client_id = keys.clientID;
-        apiParams.client_secret = keys.clientSecret;
+        apiParams.client_id = keys.default.clientID;
+        apiParams.client_secret = keys.default.clientSecret;
         apiParams.grant_type = 'authorization_code'
         apiParams.redirect_uri = 'http://localhost:8080/auth/callback';
   
