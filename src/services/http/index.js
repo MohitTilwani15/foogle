@@ -14,19 +14,17 @@ const instance = axios.create(options);
 
 function requestInterceptor(config) {
   try {
-    const reqConfig = JSON.parse(JSON.stringify(config));
-
     if (window.sessionStorage.getItem('access_token')) {
-      reqConfig.params.oauth_token = window.sessionStorage.getItem('access_token');
+      config.params.oauth_token = window.sessionStorage.getItem('access_token');
     } else {
-      reqConfig.params.client_id = keys.clientID;
-      reqConfig.params.client_secret = keys.clientSecret;
+      config.params.client_id = keys.clientID;
+      config.params.client_secret = keys.clientSecret;
     }
   
-    reqConfig.params.categoryId = '4d4b7105d754a06374d81259';
-    reqConfig.params.v = '20180915';
+    config.params.categoryId = '4d4b7105d754a06374d81259';
+    config.params.v = '20180915';
   
-    return reqConfig;
+    return config;
   } catch (err) {
     return config;
   }
