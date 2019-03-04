@@ -5,6 +5,11 @@ import userModule from './modules/userModule';
 import searchRestaurantModule from './modules/searchRestaurantsModule';
 
 const strict = process.env.NODE_ENV !== 'production';
+const plugins = [];
+
+if (process.env.NODE_ENV !== 'production') {
+  plugins.push(createLogger());
+}
 
 const modules = {
   userModule,
@@ -15,6 +20,6 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   strict,
-  plugins: [createLogger()],
+  plugins,
   modules,
 });
