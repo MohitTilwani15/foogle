@@ -67,7 +67,7 @@ export default {
       pageLimit: 10,
       locationError: false,
       location: '',
-      sort: '',
+      sort: this.$route.query.sort,
       showLoader: false,
     };
   },
@@ -123,6 +123,10 @@ export default {
       this.$store.dispatch(`searchRestaurantModule/${SEARCH_NEARBY_RESTAURANTS}`, {
         ll: `${position.coords.latitude},${position.coords.longitude}`,
       }).then(() => {
+        if (this.sort) {
+          this.sortRestaurants();
+        }
+
         this.showLoader = false;
       }).catch(() => {
         this.showLoader = false;
@@ -134,6 +138,10 @@ export default {
       this.$store.dispatch(`searchRestaurantModule/${SEARCH_NEARBY_RESTAURANTS}`, {
         near: this.location,
       }).then(() => {
+        if (this.sort) {
+          this.sortRestaurants();
+        }
+
         this.showLoader = false;
       }).catch(() => {
         this.showLoader = false;
