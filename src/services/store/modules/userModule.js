@@ -60,7 +60,7 @@ export default {
         apiParams.client_id = keys.default.clientID;
         apiParams.client_secret = keys.default.clientSecret;
         apiParams.grant_type = 'authorization_code'
-        apiParams.redirect_uri = 'http://localhost:8080/auth/callback';
+        apiParams.redirect_uri = keys.default.redirectUri;
   
         axios.get('https://cors-anywhere.herokuapp.com/https://foursquare.com/oauth2/access_token', { params: apiParams })
           .then((response) => {
