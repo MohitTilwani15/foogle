@@ -42,7 +42,7 @@ export default {
 
   methods: {
     login() {
-      console.log(keys);
+      console.log(keys.default.clientID);
       window.location.href = `https://foursquare.com/oauth2/authenticate?client_id=${keys.default.clientID}&response_type=code&redirect_uri=${keys.default.redirectUri}`;
     },
 
