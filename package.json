@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "test:unit:watch": "vue-cli-service test:unit --watch",
     "test:unit": "vue-cli-service test:unit",
     "start": "node server.js"
   },
@@ -29,6 +30,7 @@
     "babel-jest": "^24.1.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "lodash": "^4.17.11",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
