@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 export const router = new VueRouter({
   mode: 'history',
   base: __dirname,
-  routes: [...HomeRoute, ...FavoritesRoute, CallbackRoute],
+  routes: [...HomeRoute, ...FavoritesRoute, ...CallbackRoute],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return { selector: to.hash };
